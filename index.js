@@ -7,5 +7,5 @@
  */
 
 module.exports = function () {
-    return /(^|\s)@import(\s|$)*(?:url\s?\((?:[^)]+)\))|(\'|")(?:.*)\1/gi;
+    return /@import\s+(?:url\s?\((?:[^)]+)\))|@import\s+(\'|")(?:.*)\1/gi;
 };
