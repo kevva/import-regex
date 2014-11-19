@@ -4,16 +4,47 @@ var importRegex = require('./');
 var test = require('ava');
 
 test('match CSS @imports', function (t) {
-	t.plan(3);
-
 	var fixtures = [
-		'@import url(\'foo.css\');',
-		'@import url(\'bar.css\');'
+		'@import "foo/bar.css";',
+		'@import "foo/bar.css" (min-width: 25em);',
+		'@import url(foo/bar.css);',
+		'@import url(foo/bar.css) (min-width: 25em);',
+		'@import url("foo/bar.css");',
+		'@import url("foo/bar.css") (min-width: 25em);',
+		'@import url(\'foo/bar.css\');',
+		'@import url(\'foo/bar.css\') (min-width: 25em);',
+		'@import url(foo/bar.css) only screen and (min-width: 25em) and (orientation: landscape);',
+		'@import url(foo/bar.css) only screen and (min-width: 25em);'
 	];
 
 	fixtures.forEach(function (el) {
-		t.assert(importRegex().test(el), el);
+		if (!importRegex().exec(el)) {
+			t.assert(false, el);
+			return;
+		}
+
+		t.assert(importRegex().exec(el)[0] === el, el);
 	});
 
-	t.assert(importRegex().exec('aaa @import url(\'foo.css\'); aaa ')[0].trim() === '@import url(\'foo.css\')');
+	t.end();
+});
+
+test('do not match CSS @imports', function (t) {
+	var fixtures = [
+		'@import "foo/bar.css"',
+		'@import url (foo/bar.css);',
+		'@import url("foo/bar.css);',
+		'@import url(foo/bar.css) ** (min-width: 25em) ;'
+	];
+
+	fixtures.forEach(function (el) {
+		if (!importRegex().exec(el)) {
+			t.assert(true);
+			return;
+		}
+
+		t.assert(importRegex().exec(el)[0] !== el, el);
+	});
+
+	t.end();
 });
