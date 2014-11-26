@@ -16,10 +16,7 @@ var importRegex = require('import-regex');
 importRegex().test('@import url(\'foo.css\');');
 //=> true
 
-importRegex().exec('This is a CSS import @import url(\'foo.css\');')[0].trim();
-//=> @import url('foo.css');
-
-'Multiple @import url(\'foo.css\'); @import url(\'bar.css\'); CSS imports'.match(importRegex());
+'foo @import url(\'foo.css\'); bar @import url(\'bar.css\');'.match(importRegex());
 //=> ['@import url('foo.css');', '@import url('bar.css');']
 ```
 
