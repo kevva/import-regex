@@ -1,4 +1,4 @@
-# import-regex [![Build Status](https://travis-ci.org/kevva/import-regex.svg?branch=master)](https://travis-ci.org/kevva/import-regex)
+# import-regex [![Build Status](http://img.shields.io/travis/kevva/import-regex.svg?style=flat)](https://travis-ci.org/kevva/import-regex)
 
 > Regular expression for matching CSS @imports
 
