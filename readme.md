@@ -2,11 +2,13 @@
 
 > Regular expression for matching CSS @imports
 
+
 ## Install
 
-```sh
+```
 $ npm install --save import-regex
 ```
+
 
 ## Usage
 
@@ -16,15 +18,31 @@ var importRegex = require('import-regex');
 importRegex().test('@import url(\'foo.css\'); foo bar');
 //=> true
 
-importRegex({ exact: true }).test('@import url(\'foo.css\'); foo bar');
+importRegex({exact: true}).test('@import url(\'foo.css\'); foo bar');
 //=> false
 
-importRegex({ exact: true }).test('@import url(\'foo.css\');');
+importRegex({exact: true}).test('@import url(\'foo.css\');');
 //=> true
 
 'foo @import url(\'foo.css\'); bar @import url(\'bar.css\');'.match(importRegex());
 //=> ['@import url('foo.css');', '@import url('bar.css');']
 ```
+
+
+## API
+
+### importRegex(options)
+
+Returns a regex for matching CSS @imports.
+
+#### options.exact
+
+Type: `boolean`  
+Default: `false` *(Matches any CSS @import in a string)*
+
+Only match an exact string.  
+Useful with `RegExp#test` to check if a string is a CSS @import.
+
 
 ## License
 
