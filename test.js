@@ -1,5 +1,4 @@
 'use strict';
-
 var importRegex = require('./');
 var test = require('ava');
 
