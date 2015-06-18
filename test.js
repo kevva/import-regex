@@ -17,12 +17,7 @@ test('match CSS @imports', function (t) {
 	];
 
 	fixtures.forEach(function (el) {
-		if (!importRegex().exec(el)) {
-			t.assert(false, el);
-			return;
-		}
-
-		t.assert(importRegex().exec(el)[0] === el, el);
+		t.assert(importRegex({exact: true}).test(el), el);
 	});
 
 	t.end();
@@ -37,12 +32,7 @@ test('do not match CSS @imports', function (t) {
 	];
 
 	fixtures.forEach(function (el) {
-		if (!importRegex().exec(el)) {
-			t.assert(true);
-			return;
-		}
-
-		t.assert(importRegex().exec(el)[0] !== el, el);
+		t.assert(!importRegex({exact: true}).test(el), el);
 	});
 
 	t.end();

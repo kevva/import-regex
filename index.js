@@ -5,5 +5,5 @@ module.exports = function (opts) {
 	var regex = '(?:@import)(?:\\s)(?:url)?(?:(?:(?:\\()(["\'])?(?:[^"\')]+)\\1(?:\\))|(["\'])(?:.+)\\2)(?:[A-Z\\s])*)+(?:;)';
 
 	return opts.exact ? new RegExp('(?:^' + regex + '$)', 'i') :
-						new RegExp('(?:^|\\s)?' + regex, 'gi');
+						new RegExp(regex, 'gi');
 };
