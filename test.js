@@ -1,9 +1,8 @@
-'use strict';
-var importRegex = require('./');
-var test = require('ava');
+import test from 'ava';
+import m from './';
 
-test('match CSS @imports', function (t) {
-	var fixtures = [
+test('match CSS @imports', t => {
+	const fixtures = [
 		'@import "foo/bar.css";',
 		'@import "foo/bar.css" (min-width: 25em);',
 		'@import url(foo/bar.css);',
@@ -16,24 +15,20 @@ test('match CSS @imports', function (t) {
 		'@import url(foo/bar.css) only screen and (min-width: 25em);'
 	];
 
-	fixtures.forEach(function (el) {
-		t.assert(importRegex({exact: true}).test(el), el);
-	});
-
-	t.end();
+	for (const x of fixtures) {
+		t.true(m({exact: true}).test(x));
+	}
 });
 
-test('do not match CSS @imports', function (t) {
-	var fixtures = [
+test('do not match CSS @imports', t => {
+	const fixtures = [
 		'@import "foo/bar.css"',
 		'@import url (foo/bar.css);',
 		'@import url("foo/bar.css);',
 		'@import url(foo/bar.css) ** (min-width: 25em) ;'
 	];
 
-	fixtures.forEach(function (el) {
-		t.assert(!importRegex({exact: true}).test(el), el);
-	});
-
-	t.end();
+	for (const x of fixtures) {
+		t.false(m({exact: true}).test(x));
+	}
 });
