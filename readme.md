@@ -31,11 +31,13 @@ importRegex({exact: true}).test('@import url(\'foo.css\');');
 
 ## API
 
-### importRegex(options)
+### importRegex([options])
 
 Returns a regex for matching CSS @imports.
 
 #### options
+
+Type: `Object`
 
 ##### exact
 
